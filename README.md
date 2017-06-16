@@ -31,6 +31,7 @@ The current version requires:
 
 Please note there is no installer currently, and the manual setup can be quite complex if you are not familiar with Linux.
 Persevrance may be necessary.
+In the example, below the Internet radio has the IP address 192.168.0.111
 
 - Connect to your gateway via SSH for example, copy files in your user home, and run
 ```
@@ -43,6 +44,7 @@ $ sudo cp ~/ixip /etc/init.d/ixip
 $ sudo cp ~/ixip.py /etc/ixip/ixip.py
 $ sudo update-rc.d ixip defaults 99
 $ sudo apt-get install python-cherrypy3
+$ sudo iptables -t nat -A PREROUTING -i eth0 -p tcp -s 192.168.0.111 --dport 80 -j REDIRECT --to-port 8118
 $ sudo service ixip restart
 ```
 
