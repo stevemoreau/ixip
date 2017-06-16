@@ -37,14 +37,15 @@ Persevrance may be necessary.
 /home/.../ixip
 /home/.../ixip.py
 
+$ mkdir /etc/ixip
 $ sudo cp ~/ixip /etc/init.d/ixip
 $ sudo cp ~/ixip.py /etc/ixip/ixip.py
 $ sudo update-rc.d ixip defaults 99
 $ sudo apt-get install python-cherrypy3
-$ sudo service ixip restart
+$ sudo service ixip restart```
 
 - Check everything fine
-$ sudo iptables -nvL -t nat | grep 8118
+```$ sudo iptables -nvL -t nat | grep 8118
    16   704 REDIRECT   tcp  --  eth0   *       192.168.0.111        0.0.0.0/0            tcp dpt:80 redir ports 8118
 $ tail -f 
 192.168.0.111 - - [15/Jun/2017:19:24:48] "GET /setupapp/fs/asp/BrowseXML/loginXML.asp?token=0 HTTP/1.0" 200 49 "" "FSL IR/0.1"
