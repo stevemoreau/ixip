@@ -78,7 +78,7 @@ HTTP_PROXY_PORT="8118"
 HTTP_PROXY_INT_SOURCES="192.168.0.111/0"
 ```
 
-# This script does not work mine, how can I reproduce the backtracking ?
+# This script does not work with mine, how can I reproduce the backtracking ?
 
   - Login to your gateway and save network traffic coming from your radio with tcpdump for example
     ```sudo tcpdump -n -w ixip.pcap -i eth0 host 192.168.0.111 and port 80```
