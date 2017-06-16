@@ -1,0 +1,52 @@
+#! /bin/sh
+#
+
+### BEGIN INIT INFO
+# Provides:          ixip
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start ixip at boot time
+# Description:       Proxy to get radio channels on i-Xip hi-fi channel
+### END INIT INFO
+
+#set -e
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+IXIPBIN=/etc/ixip/ixip.py
+
+
+# Load the VERBOSE setting and other rcS variables
+. /lib/init/vars.sh
+
+# Define LSB log_* functions.
+# Depend on lsb-base (>= 3.2-14) to ensure that this file is present
+. /lib/lsb/init-functions
+
+case "$1" in
+restart|force-reload)
+    $0 stop
+    $0 start
+    ;;
+status)
+	# nothing, just to keep update-rc.d happy (see debian #630732)
+	;;
+start)
+    log_action_begin_msg "Starting i-Xip http proxy"
+    # ezstream -v -c /home/smoreau/ezstream/ezstream_mp3.xml &
+    $IXIPBIN > /var/log/ixip 2>&1 &
+    log_action_end_msg $?
+    ;;
+stop)
+    log_action_begin_msg "Stopping i-Xip http proxy"
+    pkill -f ixip.py
+    # pkill ezstream
+    log_action_end_msg $?
+	;;
+*)
+	echo "Usage: $SCRIPTNAME {start|stop|status|restart|force-reload}" >&2
+	exit 3
+	;;
+esac
+:
